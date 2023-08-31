@@ -57,10 +57,10 @@ INSERT INTO academic_record (name, quartal, subject, grade) VALUES
 
 
 SELECT
-name, quartal as 'Четверть', grade as 'Оценка',
-avg(grade) OVER(PARTITION BY name ORDER BY quartal ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'Текущая успеваемость',
+name, quartal AS 'Четверть', grade AS 'Оценка',
+AVG(grade) OVER(PARTITION BY name ORDER BY quartal ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS 'Текущая успеваемость',
 LAG(grade) OVER() AS 'Предыдущая четверть',
 LEAD(grade) OVER() AS 'Следующая четверть'
 FROM academic_record
-where name = 'Петя' and subject = 'физика';
+WHERE name = 'Петя' AND subject = 'физика';
 
